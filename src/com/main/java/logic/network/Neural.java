@@ -1,10 +1,11 @@
 package logic.network;
 
+import java.util.List;
+
 public class Neural {
 
     private double weight = 0;
     private int input;
-
 
     public double getWeight() {
         return weight;
@@ -20,5 +21,9 @@ public class Neural {
 
     public void setInput(int input) {
         this.input = input;
+    }
+
+    public double getOutput() {
+        return input * weight;
     }
 }
