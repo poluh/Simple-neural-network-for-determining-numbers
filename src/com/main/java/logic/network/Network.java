@@ -7,12 +7,32 @@ import java.util.List;
 public class Network {
 
     private double result;
+    private List<Layer> layers = new ArrayList<>();
 
     public Network(String number) {
         this.result = 0;
         int[] values = stringToIntArr(number);
-        while (result < 0.5) {
-            result = new Layer(15, values).getResult();
+        int i = 0;
+    }
+
+    public Network(String number, List<Layer> layers) {
+        int[] values = stringToIntArr(number);
+        for (Layer layer : layers) {
+            layer.addAllSignals(values);
+            if (layer.getResult() > 0.5) {
+                this.result = layers.indexOf(layer);
+                break;
+            }
+        }
+    }
+
+    public Network(int[] values, List<Layer> layers) {
+        for (Layer layer : layers) {
+            layer.addAllSignals(values);
+            if (layer.getResult() > 0.5) {
+                this.result = layers.indexOf(layer);
+                break;
+            }
         }
     }
 
