@@ -7,6 +7,12 @@ public class Neural {
     private double weight = 0;
     private int input;
 
+    Neural() {}
+
+    Neural(double weight) {
+        this.weight = weight;
+    }
+
     public double getWeight() {
         return weight;
     }

@@ -25,6 +25,10 @@ public class Layer {
         this.neurals = neurals;
     }
 
+    public Layer(List<Neural> neurals) {
+        this.neurals = neurals;
+    }
+
     public void addAllSignals(int[] signals) {
         for (int i = 0; i < this.neurals.size(); i++) {
             Neural neural = this.neurals.get(i);
@@ -42,7 +46,7 @@ public class Layer {
     }
 
     public double getResult() {
-        return 1 / Math.exp(-0.5 * this.neurals.stream().mapToDouble(Neural::getOutput).sum());
+        return 1 / (1 + Math.exp(-0.5 * neurals.stream().mapToDouble(Neural::getOutput).sum()));
     }
 
     public List<Neural> getNeurals() {

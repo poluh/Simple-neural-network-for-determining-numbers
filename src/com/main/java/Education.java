@@ -14,7 +14,7 @@ public class Education {
         this.layers = layers;
     }
 
-    private List<int[]> numbers = Arrays.asList(
+    private static List<int[]> numbers = Arrays.asList(
             new int[]{1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1},
             new int[]{0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
             new int[]{1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1},
@@ -46,7 +46,7 @@ public class Education {
     private List<String> four = Arrays.asList(
             "001011101111001",
             "101101111001000");
-    private List<String> five = Arrays.asList(
+    private static List<String> five = Arrays.asList(
             "111100111000111",
             "111100010001111",
             "111100011001111",
@@ -80,12 +80,12 @@ public class Education {
         List<String> allWeight = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Layer layer = layers.get(i);
-            for (int j = 0; j < 100000; j++) {
+            for (int j = 0; j < 10000; j++) {
                 int randomNum = new Random().nextInt(10);
                 int[] number = numbers.get(randomNum);
                 layer.addAllSignals(number);
 
-                if (randomNum == i && layer.getResult() < 0.60) {
+                if (randomNum == i && layer.getResult() < 0.55) {
                     changeWeinght(layer, false);
                 } else if (layer.getResult() > 0.45) {
                     changeWeinght(layer, true);
@@ -93,14 +93,21 @@ public class Education {
             }
             allWeight.add(layer.getAllWeight());
         }
-        //System.out.println(allWeight);
+        System.out.println(allWeight);
     }
 
 
     private void changeWeinght(Layer layer, boolean reduce) {
         for (Neural neural : layer.getNeurals()) {
-            if (neural.getInput() == 1) {
-                neural.setWeight(neural.getWeight() + (reduce ? -0.0000001 : 0.0000001));
+            if (neural.getInput() != 0) {
+                double newWeight = neural.getWeight();
+                if (reduce) {
+                    newWeight -= 0.0001;
+                } else {
+                    newWeight += 0.0001;
+                }
+                neural.setWeight(newWeight);
+
             }
         }
     }
@@ -113,7 +120,7 @@ public class Education {
         Education education = new Education(layers);
         education.education();
         System.out.println(layers.get(1).getAllWeight());
-        for (String ints : two) {
+        for (int[] ints : numbers) {
             Network network = new Network(ints, layers);
             System.out.println(network.getResult());
         }
