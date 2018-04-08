@@ -2,14 +2,14 @@ package logic.network;
 
 import java.util.List;
 
-public class Neural {
+public class Neuron {
 
     private double weight = 0;
     private int input;
 
-    Neural() {}
+    Neuron() {}
 
-    Neural(double weight) {
+    Neuron(double weight) {
         this.weight = weight;
     }
 
