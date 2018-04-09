@@ -41,6 +41,20 @@ public class ImageIOManager {
         });
     }
 
+    private void cropImage(BufferedImage bufferedImage) {
+        int[][] allPixels = allImagePixels(bufferedImage);
+    }
+
+    private int[][] allImagePixels(BufferedImage bufferedImage) {
+        int[][] allPixels = new int[bufferedImage.getWidth()][bufferedImage.getHeight()];
+
+        for (int i = 0; i < bufferedImage.getWidth(); i++) {
+            for (int j = 0; j < bufferedImage.getHeight(); j++) {
+                allPixels[i][j] = bufferedImage.getRGB(i, j);
+            }
+        }
+        return allPixels;
+    }
 
     public int[] getNumberMatrix() {
         return numberMatrix;
