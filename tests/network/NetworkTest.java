@@ -87,5 +87,4 @@ class NetworkTest {
     void check() {
         assertEquals(9, new Network("111101111001111").getResult());
     }
-
 }

@@ -48,7 +48,7 @@ public class Network {
         }
     }
 
-    public Network(int[] values, List<Layer> layers) {
+    Network(int[] values, List<Layer> layers) {
         for (Layer layer : layers) {
             layer.addAllSignals(values);
             if (layer.getResult() > 0.5) {
