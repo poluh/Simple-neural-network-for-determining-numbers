@@ -33,7 +33,7 @@ public class ImageIOManager {
         this.image = cropImage();
 
         try {
-            ImageIO.write(this.image, "PNG", new File(""));
+            ImageIO.write(this.image, "PNG", new File("image.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,13 +49,12 @@ public class ImageIOManager {
     }
 
     private BufferedImage cropImage() {
-        Line[] cropLines = findCropLines();
-        Point leftTopCropPoint = cropLines[0].intersectionOfLines(cropLines[3]);
-        Point leftBottomCropPoint = cropLines[3].intersectionOfLines(cropLines[2]);
-        Point rightTopCropPoint = cropLines[0].intersectionOfLines(cropLines[1]);
+        Point leftTopCropPoint = new Point(findAnchorPoint(Course.LEFT).x, findAnchorPoint(Course.TOP).y);
+        Point leftBottomCropPoint = new Point(findAnchorPoint(Course.LEFT).x, findAnchorPoint(Course.BOTTOM).y);
+        Point rightTopCropPoint = new Point(findAnchorPoint(Course.RIGHT).x, findAnchorPoint(Course.TOP).y);
 
-        int cropWidth = leftTopCropPoint.distance(leftBottomCropPoint);
-        int cropHeight = leftTopCropPoint.distance(rightTopCropPoint);
+        int cropWidth = leftTopCropPoint.distance(rightTopCropPoint);
+        int cropHeight = leftTopCropPoint.distance(leftBottomCropPoint);
         return image.getSubimage(leftTopCropPoint.x, leftTopCropPoint.y, cropWidth, cropHeight);
     }
 
@@ -66,17 +65,6 @@ public class ImageIOManager {
         RIGHT;
     }
 
-    private Line[] findCropLines() {
-        Point topPoint = findAnchorPoint(Course.TOP);
-        Point rightPoint = findAnchorPoint(Course.RIGHT);
-        Point bottomPoint = findAnchorPoint(Course.BOTTOM);
-        Point leftPoint = findAnchorPoint(Course.LEFT);
-        Line topLine = new Line(new Point(0, topPoint.y), new Point(image.getWidth(), topPoint.y));
-        Line rightLine = new Line(new Point(rightPoint.x, 0), new Point(rightPoint.x, image.getHeight()));
-        Line bottomLine = new Line(new Point(0, bottomPoint.y), new Point(image.getWidth(), bottomPoint.y));
-        Line leftLine = new Line(new Point(leftPoint.x, 0), new Point(leftPoint.x, image.getHeight()));
-        return new Line[]{topLine, rightLine, bottomLine, leftLine};
-    }
 
     private Point findAnchorPoint(Course course) {
         int imageHeight = image.getHeight() - 2;
