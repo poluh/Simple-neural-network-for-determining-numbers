@@ -1,14 +1,15 @@
 package logic.image;
 
-import logic.image.Geometry.Line;
 import logic.image.Geometry.Point;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ImageIOManager {
 
@@ -27,35 +28,47 @@ public class ImageIOManager {
 
         assert image != null;
         this.image = image;
-
         this.allPixels = allImagePixels();
-
-        this.image = cropImage();
-
+        toGrayImage();
+        cropImage();
         try {
-            ImageIO.write(this.image, "PNG", new File("image.png"));
+            ImageIO.write(image, "PNG", new File("111.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        createSubImages();
+    }
 
+    private void createSubImages() {
         int subHeight = image.getHeight() / 5;
         int subWidth = image.getWidth() / 3;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 5; j++) {
-                subImages.add(image.getSubimage(i * subWidth, j * subHeight, subWidth, subHeight));
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 3; j++) {
+                subImages.add(image.getSubimage(j * subWidth, i * subHeight, subWidth, subHeight));
             }
         }
+        AtomicInteger i = new AtomicInteger();
+        subImages.forEach(image -> {
+            i.getAndIncrement();
+            try {
+                ImageIO.write(image, "PNG", new File("image" + i + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
-    private BufferedImage cropImage() {
-        Point leftTopCropPoint = new Point(findAnchorPoint(Course.LEFT).x, findAnchorPoint(Course.TOP).y);
-        Point leftBottomCropPoint = new Point(findAnchorPoint(Course.LEFT).x, findAnchorPoint(Course.BOTTOM).y);
-        Point rightTopCropPoint = new Point(findAnchorPoint(Course.RIGHT).x, findAnchorPoint(Course.TOP).y);
+    private void cropImage() {
+        Point topPoint = findAnchorPoint(Course.TOP);
+        Point leftPoint = findAnchorPoint(Course.LEFT);
+        Point leftTopCropPoint = new Point(leftPoint.x, topPoint.y);
+        Point leftBottomCropPoint = new Point(leftPoint.x, findAnchorPoint(Course.BOTTOM).y);
+        Point rightTopCropPoint = new Point(findAnchorPoint(Course.RIGHT).x, topPoint.y);
 
         int cropWidth = leftTopCropPoint.distance(rightTopCropPoint);
         int cropHeight = leftTopCropPoint.distance(leftBottomCropPoint);
-        return image.getSubimage(leftTopCropPoint.x, leftTopCropPoint.y, cropWidth, cropHeight);
+        this.image = this.image.getSubimage(leftTopCropPoint.x, leftTopCropPoint.y, cropWidth, cropHeight);
     }
 
     private enum Course {
@@ -118,6 +131,23 @@ public class ImageIOManager {
             }
         }
         return allPixels;
+    }
+
+    private void toGrayImage() {
+        for (int i = 0; i < this.image.getWidth(); i++) {
+            for (int j = 0; j < this.image.getHeight(); j++) {
+                Color pixelColor = new Color(this.image.getRGB(i, j));
+                int rgb = (pixelColor.getRed() + pixelColor.getGreen() + pixelColor.getBlue()) / 3;
+                Color newPixelColor = new Color(rgb, rgb, rgb).brighter();
+                this.image.setRGB(i, j, newPixelColor.getRGB());
+            }
+        }
+    }
+
+    private void binarizaid() {
+        for (int i = 0; i < image.getWidth(); i++) {
+
+        }
     }
 
     public int[] getNumberMatrix() {

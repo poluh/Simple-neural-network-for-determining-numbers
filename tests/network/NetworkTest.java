@@ -23,16 +23,16 @@ class NetworkTest {
                     "111101111101111",
                     "111101111001111");
 
-    private static List<String> zero = Arrays.asList(
+    private List<String> zero = Arrays.asList(
             "010101101101010",
             "111101000000111",
             "111101101101000",
             "111101000000111");
-    private static List<String> one = Arrays.asList(
+    private List<String> one = Arrays.asList(
             "001001000000001",
             "001011001001001",
             "001001001000001");
-    private static List<String> two = Arrays.asList(
+    private List<String> two = Arrays.asList(
             "111001010100111",
             "111001011100110",
             "101001111100101");
@@ -42,7 +42,7 @@ class NetworkTest {
     private List<String> four = Arrays.asList(
             "001101111001001",
             "101101111001000");
-    private static List<String> five = Arrays.asList(
+    private List<String> five = Arrays.asList(
             "111100111000111",
             "111100010001111",
             "110100111001111",
