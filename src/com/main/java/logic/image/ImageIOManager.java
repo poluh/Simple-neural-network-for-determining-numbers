@@ -8,13 +8,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ImageIOManager {
 
     private int[] numberMatrix = new int[15];
     private int[][] allPixels;
+    private List<Integer> allPixelsArr;
     private List<BufferedImage> subImages = new ArrayList<>();
     private BufferedImage image;
 
@@ -30,14 +33,17 @@ public class ImageIOManager {
         this.image = image;
         this.allPixels = allImagePixels();
         toGrayImage();
-        cropImage();
+        this.image = binarizaid();
+        this.image = cropImage();
         try {
-            ImageIO.write(image, "PNG", new File("111.png"));
+            ImageIO.write(this.image, "PNG", new File("bin.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         createSubImages();
     }
+
+
 
     private void createSubImages() {
         int subHeight = image.getHeight() / 5;
@@ -59,7 +65,7 @@ public class ImageIOManager {
         });
     }
 
-    private void cropImage() {
+    private BufferedImage cropImage() {
         Point topPoint = findAnchorPoint(Course.TOP);
         Point leftPoint = findAnchorPoint(Course.LEFT);
         Point leftTopCropPoint = new Point(leftPoint.x, topPoint.y);
@@ -68,7 +74,7 @@ public class ImageIOManager {
 
         int cropWidth = leftTopCropPoint.distance(rightTopCropPoint);
         int cropHeight = leftTopCropPoint.distance(leftBottomCropPoint);
-        this.image = this.image.getSubimage(leftTopCropPoint.x, leftTopCropPoint.y, cropWidth, cropHeight);
+        return this.image.getSubimage(leftTopCropPoint.x, leftTopCropPoint.y, cropWidth, cropHeight);
     }
 
     private enum Course {
@@ -138,16 +144,83 @@ public class ImageIOManager {
             for (int j = 0; j < this.image.getHeight(); j++) {
                 Color pixelColor = new Color(this.image.getRGB(i, j));
                 int rgb = (pixelColor.getRed() + pixelColor.getGreen() + pixelColor.getBlue()) / 3;
-                Color newPixelColor = new Color(rgb, rgb, rgb).brighter();
+                Color newPixelColor = new Color(rgb, rgb, rgb);
                 this.image.setRGB(i, j, newPixelColor.getRGB());
             }
         }
     }
 
-    private void binarizaid() {
-        for (int i = 0; i < image.getWidth(); i++) {
 
+
+    private BufferedImage binarizaid() {
+        int treshold = searchTresholdBinarizaid();
+        for (int i = 0; i < this.image.getWidth(); i++) {
+            for (int j = 0; j < this.image.getHeight(); j++) {
+                if (this.image.getRGB(i, j) > treshold) {
+                    this.image.setRGB(i, j, new Color(255, 255, 255).getRGB());
+                } else {
+                    this.image.setRGB(i, j, new Color(0, 0, 0).getRGB());
+                }
+            }
         }
+        return this.image;
+    }
+
+    private int searchTresholdBinarizaid() {
+        int maxBrightness = 0;
+        int minBrightness = 255;
+        for (int i = 0; i < this.image.getWidth(); i++) {
+            for (int j = 0; j < this.image.getHeight(); j++) {
+                int currentBrightness = allPixels[i][j];
+                maxBrightness = currentBrightness > maxBrightness ? currentBrightness : maxBrightness;
+                minBrightness = currentBrightness < minBrightness ? currentBrightness : minBrightness;
+            }
+        }
+        int threshold = thresholdCounting(maxBrightness, minBrightness);
+        threshold = maxBrightness - threshold;
+
+        return threshold;
+    }
+
+    private int[] createBarChart(int maxBrightness, int minBrightness) {
+        int barChartSize = maxBrightness - minBrightness + 1;
+        int[] barChart = new int[barChartSize];
+        for (int i = 0; i < this.image.getHeight() * this.image.getWidth(); i++) {
+            int x = i < this.image.getWidth() ? i : i % this.image.getWidth();
+            int y = x == i ? 0 : i / this.image.getWidth();
+            barChart[allPixels[x][y] - minBrightness]++;
+        }
+        return barChart;
+    }
+
+    private int thresholdCounting(int maxBrightness, int minBrightness) {
+        int[] barChart = createBarChart(maxBrightness, minBrightness);
+        int sumAllColumnHeights = 0;
+        int sumAllCHAndMiddle = 0;
+        for (int i = 0; i <= maxBrightness - minBrightness; i++) {
+            sumAllColumnHeights += barChart[i];
+            sumAllCHAndMiddle += i * barChart[i];
+        }
+
+        double maxSigma = -1;
+        int threshold = 0;
+        int alpha = 0;
+        int beta = 0;
+        for (int i = 0; i < maxBrightness - minBrightness; i++) {
+            alpha += i * barChart[i];
+            beta += barChart[i];
+            double probability = (double) beta / sumAllColumnHeights;
+            double intermediateMiddleSum = (double) alpha / beta -
+                    (double) (sumAllCHAndMiddle - alpha) /
+                            (sumAllColumnHeights - beta);
+            double sigma = probability * (1 - probability) * intermediateMiddleSum * intermediateMiddleSum;
+
+            if (sigma > maxSigma) {
+                maxSigma = sigma;
+                threshold = i;
+            }
+        }
+        return threshold;
     }
 
     public int[] getNumberMatrix() {
