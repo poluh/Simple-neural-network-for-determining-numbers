@@ -8,41 +8,30 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ImageIOManager {
 
     private int[] numberMatrix = new int[15];
     private int[][] allPixels;
-    private List<Integer> allPixelsArr;
     private List<BufferedImage> subImages = new ArrayList<>();
     private BufferedImage image;
 
     public ImageIOManager(String path) {
-        BufferedImage image;
         try {
-            image = ImageIO.read(new File(path));
+            this.image = ImageIO.read(new File(path));
         } catch (IOException e) {
             throw new IllegalArgumentException("Error open image");
         }
 
-        assert image != null;
-        this.image = image;
         this.allPixels = allImagePixels();
         toGrayImage();
-        this.image = binarizaid();
-        this.image = cropImage();
-        try {
-            ImageIO.write(this.image, "PNG", new File("bin.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.allPixels = allImagePixels();
+        binarizaid();
+        this.allPixels = allImagePixels();
+        cropImage();
         createSubImages();
     }
-
 
 
     private void createSubImages() {
@@ -54,18 +43,9 @@ public class ImageIOManager {
                 subImages.add(image.getSubimage(j * subWidth, i * subHeight, subWidth, subHeight));
             }
         }
-        AtomicInteger i = new AtomicInteger();
-        subImages.forEach(image -> {
-            i.getAndIncrement();
-            try {
-                ImageIO.write(image, "PNG", new File("image" + i + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 
-    private BufferedImage cropImage() {
+    private void cropImage() {
         Point topPoint = findAnchorPoint(Course.TOP);
         Point leftPoint = findAnchorPoint(Course.LEFT);
         Point leftTopCropPoint = new Point(leftPoint.x, topPoint.y);
@@ -74,7 +54,7 @@ public class ImageIOManager {
 
         int cropWidth = leftTopCropPoint.distance(rightTopCropPoint);
         int cropHeight = leftTopCropPoint.distance(leftBottomCropPoint);
-        return this.image.getSubimage(leftTopCropPoint.x, leftTopCropPoint.y, cropWidth, cropHeight);
+        this.image = this.image.getSubimage(leftTopCropPoint.x, leftTopCropPoint.y, cropWidth, cropHeight);
     }
 
     private enum Course {
@@ -150,9 +130,7 @@ public class ImageIOManager {
         }
     }
 
-
-
-    private BufferedImage binarizaid() {
+    private void binarizaid() {
         int treshold = searchTresholdBinarizaid();
         for (int i = 0; i < this.image.getWidth(); i++) {
             for (int j = 0; j < this.image.getHeight(); j++) {
@@ -163,7 +141,6 @@ public class ImageIOManager {
                 }
             }
         }
-        return this.image;
     }
 
     private int searchTresholdBinarizaid() {
@@ -172,14 +149,11 @@ public class ImageIOManager {
         for (int i = 0; i < this.image.getWidth(); i++) {
             for (int j = 0; j < this.image.getHeight(); j++) {
                 int currentBrightness = allPixels[i][j];
-                maxBrightness = currentBrightness > maxBrightness ? currentBrightness : maxBrightness;
-                minBrightness = currentBrightness < minBrightness ? currentBrightness : minBrightness;
+                maxBrightness = Math.max(currentBrightness, maxBrightness);
+                minBrightness = Math.min(currentBrightness, minBrightness);
             }
         }
-        int threshold = thresholdCounting(maxBrightness, minBrightness);
-        threshold = maxBrightness - threshold;
-
-        return threshold;
+        return maxBrightness - thresholdCounting(maxBrightness, minBrightness);
     }
 
     private int[] createBarChart(int maxBrightness, int minBrightness) {
