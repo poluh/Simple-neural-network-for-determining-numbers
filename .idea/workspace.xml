@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42ddb422-8559-4f8a-a634-3f78473fbe73" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/main/java/logic/image/ImagePreprocessor.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/main/java/Main.java" afterPath="$PROJECT_DIR$/src/com/main/java/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/main/java/logic/image/ImageIOManager.java" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -534,7 +531,7 @@
       <workItem from="1523564442054" duration="6133000" />
       <workItem from="1523603221294" duration="3119000" />
       <workItem from="1523653357859" duration="289000" />
-      <workItem from="1523655032115" duration="4737000" />
+      <workItem from="1523655032115" duration="4779000" />
     </task>
     <task id="LOCAL-00001" summary="Small changes">
       <created>1523093676528</created>
@@ -607,7 +604,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82376000" />
+    <option name="totallyTimeSpent" value="82418000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
