@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="42ddb422-8559-4f8a-a634-3f78473fbe73" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java" afterPath="$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -48,8 +49,8 @@
       <file leaf-file-name="Education.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -252,6 +253,18 @@
               <item name="logic" type="462c0819:PsiDirectoryNode" />
               <item name="network" type="462c0819:PsiDirectoryNode" />
               <item name="education" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Simple-neural-network-for-determining-numbers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Simple-neural-network-for-determining-numbers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="network" type="462c0819:PsiDirectoryNode" />
+              <item name="education" type="462c0819:PsiDirectoryNode" />
+              <item name="imageForEducation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Simple-neural-network-for-determining-numbers" type="b2602c69:ProjectViewProjectNode" />
@@ -531,7 +544,7 @@
       <workItem from="1523564442054" duration="6133000" />
       <workItem from="1523603221294" duration="3119000" />
       <workItem from="1523653357859" duration="289000" />
-      <workItem from="1523655032115" duration="4779000" />
+      <workItem from="1523655032115" duration="5279000" />
     </task>
     <task id="LOCAL-00001" summary="Small changes">
       <created>1523093676528</created>
@@ -604,7 +617,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82418000" />
+    <option name="totallyTimeSpent" value="82918000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1030,8 +1043,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="225">
+          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
           <folding />
         </state>
       </provider>
