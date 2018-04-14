@@ -31,10 +31,11 @@ public class ImagePreprocessor {
         allImagePixels();
         toGrayImage(this.image);
         allImagePixels();
+        cropImage(this.image);
+        allImagePixels();
         binarizaid(this.image);
         allImagePixels();
         cropImage(this.image);
-        saveImage(this.image);
         createSubImages();
     }
 

@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="42ddb422-8559-4f8a-a634-3f78473fbe73" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/java/Main.java" afterPath="$PROJECT_DIR$/src/com/main/java/Main.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/java/logic/image/ImagePreprocessor.java" afterPath="$PROJECT_DIR$/src/com/main/java/logic/image/ImagePreprocessor.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/java/logic/network/Layer.java" afterPath="$PROJECT_DIR$/src/com/main/java/logic/network/Layer.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/java/logic/network/Network.java" afterPath="$PROJECT_DIR$/src/com/main/java/logic/network/Network.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/java/logic/network/Neuron.java" afterPath="$PROJECT_DIR$/src/com/main/java/logic/network/Neuron.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/java/logic/network/NeuronsWeight.txt" afterPath="$PROJECT_DIR$/src/com/main/java/logic/network/NeuronsWeight.txt" />
       <change beforePath="$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java" afterPath="$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logic/network/Education.class" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,16 +26,16 @@
       <file leaf-file-name="ImagePreprocessor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/image/ImagePreprocessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+            <state relative-caret-position="234">
+              <caret line="35" column="31" lean-forward="true" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1183#1184#0" expanded="true" />
-                <element signature="e#1229#1230#0" expanded="true" />
-                <element signature="e#8389#8390#0" expanded="true" />
-                <element signature="e#8417#8418#0" expanded="true" />
-                <element signature="e#8466#8467#0" expanded="true" />
-                <element signature="e#8498#8499#0" expanded="true" />
+                <element signature="e#1209#1210#0" expanded="true" />
+                <element signature="e#1255#1256#0" expanded="true" />
+                <element signature="e#8415#8416#0" expanded="true" />
+                <element signature="e#8443#8444#0" expanded="true" />
+                <element signature="e#8492#8493#0" expanded="true" />
+                <element signature="e#8524#8525#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -37,8 +44,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+            <state relative-caret-position="75">
+              <caret line="5" column="101" lean-forward="false" selection-start-line="5" selection-start-column="101" selection-end-line="5" selection-end-column="101" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -46,41 +53,64 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Education.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Education.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+            <state relative-caret-position="227">
+              <caret line="26" column="39" lean-forward="false" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NeuronsWeight.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/NeuronsWeight.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2325">
+              <caret line="155" column="20" lean-forward="true" selection-start-line="155" selection-start-column="20" selection-end-line="155" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Line.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/image/Geometry/Line.java">
+      <file leaf-file-name="NetworkTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/network/NetworkTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="13" column="54" lean-forward="false" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
-              <folding>
-                <element signature="e#251#252#0" expanded="true" />
-                <element signature="e#312#313#0" expanded="true" />
-                <element signature="e#358#359#0" expanded="true" />
-                <element signature="e#430#431#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-254">
+              <caret line="25" column="11" lean-forward="false" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NetworkTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/network/NetworkTest.java">
+      <file leaf-file-name="Layer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/Layer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="25" column="11" lean-forward="false" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2670#2671#0" expanded="true" />
-                <element signature="e#2745#2746#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="165">
+              <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Neuron.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/Neuron.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Network.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/Network.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="370">
+              <caret line="65" column="9" lean-forward="true" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -115,19 +145,19 @@
         <option value="$PROJECT_DIR$/src/com/main/java/logic/network/Semmative.java" />
         <option value="$PROJECT_DIR$/src/com/main/java/Education.java" />
         <option value="$PROJECT_DIR$/src/com/main/java/logic/network/Neural.java" />
-        <option value="$PROJECT_DIR$/src/com/main/java/logic/network/Neuron.java" />
-        <option value="$PROJECT_DIR$/src/com/main/java/logic/network/Layer.java" />
         <option value="$PROJECT_DIR$/src/com/main/java/logic/network/Education.java" />
         <option value="$PROJECT_DIR$/src/com/main/java/logic/image/Point.java" />
-        <option value="$PROJECT_DIR$/src/com/main/java/logic/network/Network.java" />
-        <option value="$PROJECT_DIR$/src/com/main/java/logic/network/NeuronsWeight.txt" />
         <option value="$PROJECT_DIR$/src/com/main/java/logic/image/Geometry/Point.java" />
         <option value="$PROJECT_DIR$/src/com/main/java/logic/image/Geometry/Line.java" />
         <option value="$PROJECT_DIR$/tests/network/NetworkTest.java" />
         <option value="$PROJECT_DIR$/src/com/main/java/logic/image/ImageIOManager.java" />
-        <option value="$PROJECT_DIR$/src/com/main/java/logic/image/ImagePreprocessor.java" />
-        <option value="$PROJECT_DIR$/src/com/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/main/java/logic/network/Layer.java" />
+        <option value="$PROJECT_DIR$/src/com/main/java/logic/network/Neuron.java" />
         <option value="$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java" />
+        <option value="$PROJECT_DIR$/src/com/main/java/logic/network/NeuronsWeight.txt" />
+        <option value="$PROJECT_DIR$/src/com/main/java/logic/network/Network.java" />
+        <option value="$PROJECT_DIR$/src/com/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/main/java/logic/image/ImagePreprocessor.java" />
       </list>
     </option>
   </component>
@@ -308,12 +338,31 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.NetworkTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
+    </configuration>
+    <configuration name="Education" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="logic.network.education.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="logic.network.education.Education" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="my-module" />
+      <envs />
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -357,31 +406,6 @@
       <option name="MAIN_CLASS_NAME" value="network.NetworkTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="NetworkTest.check" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="network.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="my-module" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="network" />
-      <option name="MAIN_CLASS_NAME" value="network.NetworkTest" />
-      <option name="METHOD_NAME" value="check" />
-      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -506,17 +530,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.NetworkTest.checkNormalNumber" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.NetworkTest.check" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.NetworkTest.testSample" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.NetworkTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.NetworkTest.testSample" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.NetworkTest" />
+      <item index="4" class="java.lang.String" itemvalue="Application.Education" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.NetworkTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.NetworkTest.testSample" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.NetworkTest.checkNormalNumber" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.NetworkTest.check" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.NetworkTest" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="2" class="java.lang.String" itemvalue="Application.Education" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.NetworkTest.testSample" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.NetworkTest.checkNormalNumber" />
       </list>
     </recent_temporary>
   </component>
@@ -544,7 +568,7 @@
       <workItem from="1523564442054" duration="6133000" />
       <workItem from="1523603221294" duration="3119000" />
       <workItem from="1523653357859" duration="289000" />
-      <workItem from="1523655032115" duration="5279000" />
+      <workItem from="1523655032115" duration="7708000" />
     </task>
     <task id="LOCAL-00001" summary="Small changes">
       <created>1523093676528</created>
@@ -585,7 +609,7 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="NetworkTest - 2018.04.09 at 15h 07m 48s.xml">
+    <history-entry file="NetworkTest - 2018.04.14 at 10h 50m 30s.xml">
       <configuration name="NetworkTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="NetworkTest_testSample - 2018.04.08 at 23h 41m 05s.xml">
@@ -617,7 +641,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82918000" />
+    <option name="totallyTimeSpent" value="85347000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -629,7 +653,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21765417" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37122127" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2732769" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28540772" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -690,10 +714,10 @@
         <state relative-caret-position="75">
           <caret line="5" column="14" lean-forward="false" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
           <folding>
-            <element signature="e#251#252#0" expanded="true" />
-            <element signature="e#312#313#0" expanded="true" />
-            <element signature="e#358#359#0" expanded="true" />
-            <element signature="e#430#431#0" expanded="true" />
+            <element signature="e#251#252#0" expanded="false" />
+            <element signature="e#312#313#0" expanded="false" />
+            <element signature="e#358#359#0" expanded="false" />
+            <element signature="e#430#431#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -703,9 +727,9 @@
         <state relative-caret-position="120">
           <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2670#2671#0" expanded="true" />
-            <element signature="e#2745#2746#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2670#2671#0" expanded="false" />
+            <element signature="e#2745#2746#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -750,9 +774,9 @@
         <state relative-caret-position="1095">
           <caret line="79" column="44" lean-forward="false" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2670#2671#0" expanded="true" />
-            <element signature="e#2745#2746#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2670#2671#0" expanded="false" />
+            <element signature="e#2745#2746#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -920,34 +944,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/Layer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="53" column="5" lean-forward="false" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/Network.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="50" column="4" lean-forward="false" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/Neuron.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/NeuronsWeight.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/image.png" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/awt/image/BufferedImage.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -982,19 +978,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/image/Geometry/Line.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="13" column="54" lean-forward="false" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
-          <folding>
-            <element signature="e#251#252#0" expanded="true" />
-            <element signature="e#312#313#0" expanded="true" />
-            <element signature="e#358#359#0" expanded="true" />
-            <element signature="e#430#431#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/image/ImageIOManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1003,48 +986,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/image/ImagePreprocessor.java">
+    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/image/Geometry/Line.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+        <state relative-caret-position="195">
+          <caret line="13" column="54" lean-forward="false" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
+          <folding>
+            <element signature="e#251#252#0" expanded="false" />
+            <element signature="e#312#313#0" expanded="false" />
+            <element signature="e#358#359#0" expanded="false" />
+            <element signature="e#430#431#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/Neuron.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/Layer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="26" column="39" lean-forward="false" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1183#1184#0" expanded="true" />
-            <element signature="e#1229#1230#0" expanded="true" />
-            <element signature="e#8389#8390#0" expanded="true" />
-            <element signature="e#8417#8418#0" expanded="true" />
-            <element signature="e#8466#8467#0" expanded="true" />
-            <element signature="e#8498#8499#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/NeuronsWeight.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2325">
+          <caret line="155" column="20" lean-forward="true" selection-start-line="155" selection-start-column="20" selection-end-line="155" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/Network.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="65" column="9" lean-forward="true" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="101" lean-forward="false" selection-start-line="5" selection-start-column="101" selection-end-line="5" selection-end-column="101" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/image/ImagePreprocessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="35" column="31" lean-forward="true" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1209#1210#0" expanded="true" />
+            <element signature="e#1255#1256#0" expanded="true" />
+            <element signature="e#8415#8416#0" expanded="true" />
+            <element signature="e#8443#8444#0" expanded="true" />
+            <element signature="e#8492#8493#0" expanded="true" />
+            <element signature="e#8524#8525#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/network/NetworkTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="-254">
           <caret line="25" column="11" lean-forward="false" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2670#2671#0" expanded="true" />
-            <element signature="e#2745#2746#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/java/logic/network/education/Education.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
           <folding />
         </state>
       </provider>

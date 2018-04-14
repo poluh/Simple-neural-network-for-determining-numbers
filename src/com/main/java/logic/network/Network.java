@@ -30,7 +30,7 @@ public class Network {
     }
 
     public Network(String number) {
-        List<Layer> layers = new ArrayList<>();
+        /*List<Layer> layers = new ArrayList<>();
         for (int i = 0; i < 10; ++i) {
             List<Neuron> neurons = new ArrayList<>();
             for (int j = 0; j < 15; ++j) {
@@ -45,10 +45,18 @@ public class Network {
                 this.result = layers.indexOf(layer);
                 break;
             }
-        }
+        }*/
     }
 
-    Network(int[] values, List<Layer> layers) {
+    public Network(double[] values) {
+        List<Layer> layers = new ArrayList<>();
+        for (int i = 0; i < 10; ++i) {
+            List<Neuron> neurons = new ArrayList<>();
+            for (int j = 0; j < 15; ++j) {
+                neurons.add(new Neuron(neuronsWeight.get(j + (i * 15))));
+            }
+            layers.add(new Layer(neurons));
+        }
         for (Layer layer : layers) {
             layer.addAllSignals(values);
             if (layer.getResult() > 0.5) {
