@@ -1,5 +1,6 @@
 package network;
 
+import logic.image.ImagePreprocessor;
 import logic.network.Network;
 import org.junit.jupiter.api.Test;
 
@@ -64,27 +65,15 @@ class NetworkTest {
             "111101111001001");
 
     private List<List<String>> testSample = Arrays.asList(zero, one, two, three, four, five, six, seven, eight, nine);
+    private String commonPath = "src/com/main/java/logic/network/education/imageForEducation/";
 
     @Test
     void checkNormalNumber() {
         for (int i = 0; i < 10; i++) {
-            Network network = new Network(normalNumbers.get(i));
+            ImagePreprocessor imagePreprocessor = new ImagePreprocessor(commonPath + i + ".png",
+                    15);
+            Network network = new Network(imagePreprocessor.getImageSignals());
             assertEquals(i, network.getResult());
         }
-    }
-
-    @Test
-    void testSample() {
-        for (int i = 0; i < 10; i++) {
-            int finalI = i;
-            testSample.get(i).forEach(number -> {
-                assertEquals(finalI, new Network(number).getResult());
-            });
-        }
-    }
-
-    @Test
-    void check() {
-        assertEquals(9, new Network("111101111001111").getResult());
     }
 }
