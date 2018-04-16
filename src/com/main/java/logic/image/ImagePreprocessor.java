@@ -30,16 +30,15 @@ public class ImagePreprocessor {
         this.imageSignals = new double[numberOfNeurons];
         allImagePixels();
         toGrayImage(this.image);
-        allImagePixels();
-        cropImage(this.image);
-        allImagePixels();
+        brightnessOfPixels();
         binarizaid(this.image);
+        saveImage(this.image);
         allImagePixels();
         cropImage(this.image);
         createSubImages();
     }
 
-    ImagePreprocessor(BufferedImage image, int numberOfNeurons) {
+    public ImagePreprocessor(BufferedImage image, int numberOfNeurons) {
         create(image, numberOfNeurons);
     }
 
@@ -51,12 +50,12 @@ public class ImagePreprocessor {
         }
     }
 
-    public void createSubImages() {
-        int subHeight = image.getHeight() / 5;
-        int subWidth = image.getWidth() / 3;
+    private void createSubImages() {
+        int subHeight = image.getHeight() / 10;
+        int subWidth = image.getWidth() / 6;
         subImages = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 6; j++) {
                 subImages.add(image.getSubimage(j * subWidth, i * subHeight, subWidth, subHeight));
             }
         }
@@ -74,7 +73,7 @@ public class ImagePreprocessor {
         this.image = image;
     }
 
-    public void cropImage(BufferedImage image) {
+    private void cropImage(BufferedImage image) {
         Point topPoint = findAnchorPoint(Course.TOP);
         Point leftPoint = findAnchorPoint(Course.LEFT);
         Point leftTopCropPoint = new Point(leftPoint.x, topPoint.y);
@@ -149,8 +148,8 @@ public class ImagePreprocessor {
     }
 
     private int searchTresholdBinarizaid(BufferedImage image) {
-        int maxBrightness = 0;
-        int minBrightness = 255;
+        int maxBrightness = 255;
+        int minBrightness = 0;
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int currentBrightness = allImagePixels[i][j];
@@ -214,13 +213,28 @@ public class ImagePreprocessor {
         this.allImagePixels = allPixels;
     }
 
+    private void brightnessOfPixels() {
+        int[][] brightnessOfPixels = new int[image.getWidth()][image.getHeight()];
+
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                Color currentColor = new Color(image.getRGB(i, j));
+                int brightness = (int) (0.2125 * currentColor.getRed() +
+                                0.7154 * currentColor.getGreen() +
+                                0.0721 * currentColor.getBlue());
+                brightnessOfPixels[i][j] = brightness;
+            }
+        }
+        this.allImagePixels = brightnessOfPixels;
+    }
+
     public void saveImage(BufferedImage bufferedImage) {
-        saveImage(bufferedImage, "image.jpg");
+        saveImage(bufferedImage, "image.png");
     }
 
     public void saveImage(BufferedImage image, String fileName) {
         try {
-            ImageIO.write(image, "JPG", new File(fileName));
+            ImageIO.write(image, "PNG", new File(fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }

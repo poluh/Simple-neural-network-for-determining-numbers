@@ -29,31 +29,12 @@ public class Network {
         }
     }
 
-    public Network(String number) {
-        /*List<Layer> layers = new ArrayList<>();
-        for (int i = 0; i < 10; ++i) {
-            List<Neuron> neurons = new ArrayList<>();
-            for (int j = 0; j < 15; ++j) {
-                neurons.add(new Neuron(neuronsWeight.get(j + (i * 15))));
-            }
-            layers.add(new Layer(neurons));
-        }
-        int[] values = stringToIntArr(number);
-        for (Layer layer : layers) {
-            layer.addAllSignals(values);
-            if (layer.getResult() > 0.5) {
-                this.result = layers.indexOf(layer);
-                break;
-            }
-        }*/
-    }
-
     public Network(double[] values) {
         List<Layer> layers = new ArrayList<>();
         for (int i = 0; i < 10; ++i) {
             List<Neuron> neurons = new ArrayList<>();
-            for (int j = 0; j < 15; ++j) {
-                neurons.add(new Neuron(neuronsWeight.get(j + (i * 15))));
+            for (int j = 0; j < 60; ++j) {
+                neurons.add(new Neuron(neuronsWeight.get(j + (i * 60))));
             }
             layers.add(new Layer(neurons));
         }
@@ -67,7 +48,7 @@ public class Network {
     }
 
     private int[] stringToIntArr(String string) {
-        int[] values = new int[15];
+        int[] values = new int[60];
         char[] chars = string.toCharArray();
         Arrays.setAll(values, i -> Integer.parseInt(String.valueOf(chars[i])));
         return values;

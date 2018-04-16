@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -70,10 +71,13 @@ class NetworkTest {
     @Test
     void checkNormalNumber() {
         for (int i = 0; i < 10; i++) {
-            ImagePreprocessor imagePreprocessor = new ImagePreprocessor(commonPath + i + ".png",
-                    15);
-            Network network = new Network(imagePreprocessor.getImageSignals());
-            assertEquals(i, network.getResult());
+            for (int j = 0; j < new Random().nextInt(10); j++) {
+                ImagePreprocessor imagePreprocessor = new ImagePreprocessor(String.format("%s%d/%d%d.png", commonPath, i, i, j),
+                        60);
+                Network network = new Network(imagePreprocessor.getImageSignals());
+                assertEquals(i, network.getResult());
+                System.out.println(i + "" + j);
+            }
         }
     }
 }

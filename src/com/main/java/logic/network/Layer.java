@@ -38,9 +38,8 @@ public class Layer {
 
     public String getAllWeight() {
         StringBuilder answer = new StringBuilder();
-        for (int i = 0; i < this.neurons.size(); i++) {
-            Neuron neuron = this.neurons.get(i);
-            answer.append(i).append("=").append(neuron.getWeight()).append("\n");
+        for (Neuron neuron : this.neurons) {
+            answer.append(neuron.getWeight()).append("\n");
         }
         return answer.toString();
     }
