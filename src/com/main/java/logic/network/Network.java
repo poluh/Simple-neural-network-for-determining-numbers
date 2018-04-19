@@ -3,12 +3,10 @@ package logic.network;
 import logic.image.ImagePreprocessor;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -16,7 +14,7 @@ public class Network {
 
     private double result;
     private static List<Double> neuronsWeight = new ArrayList<>();
-    private static int numberOfNeuron = 60;
+    public static int NUMBER_OF_NEURON = 60;
     static {
         List<String> neuronsWeightInFile;
         try {
@@ -38,8 +36,8 @@ public class Network {
         List<Layer> layers = new ArrayList<>();
         for (int i = 0; i < 10; ++i) {
             List<Neuron> neurons = new ArrayList<>();
-            for (int j = 0; j < numberOfNeuron; ++j) {
-                neurons.add(new Neuron(neuronsWeight.get(j + (i * numberOfNeuron))));
+            for (int j = 0; j < NUMBER_OF_NEURON; ++j) {
+                neurons.add(new Neuron(neuronsWeight.get(j + (i * NUMBER_OF_NEURON))));
             }
             layers.add(new Layer(neurons));
         }
@@ -53,17 +51,17 @@ public class Network {
     }
 
     public Network(BufferedImage image) {
-        ImagePreprocessor imagePreprocessor = new ImagePreprocessor(image, numberOfNeuron);
+        ImagePreprocessor imagePreprocessor = new ImagePreprocessor(image);
         imagePreprocessor.toGrayImage();
         //imagePreprocessor.binarizaid();
         imagePreprocessor.cropImage();
 
-        String imageName = "30.png";
+        /*String imageName = "90.png";
         while (new File(imageName).exists()) {
             int imageNum = Integer.parseInt(imageName.split("\\.")[0]) + 1;
             imageName = imageNum + ".png";
         }
-        imagePreprocessor.saveImage(imagePreprocessor.getImage(), imageName);
+        imagePreprocessor.saveImage(imagePreprocessor.getImage(), imageName);*/
         imagePreprocessor.createSubImages();
         detecting(imagePreprocessor.getImageSignals());
     }

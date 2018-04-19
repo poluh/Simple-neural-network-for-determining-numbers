@@ -2,10 +2,12 @@ package logic.image;
 
 
 import logic.image.Geometry.Point;
+import logic.network.Network;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.RasterFormatException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,25 +32,45 @@ public class ImagePreprocessor {
         updatePixelsImage();
     }
 
-    public ImagePreprocessor(BufferedImage image, int numberOfNeurons) {
-        create(image, numberOfNeurons);
+    public ImagePreprocessor(BufferedImage image) {
+        create(image, Network.NUMBER_OF_NEURON);
     }
 
-    public ImagePreprocessor(String path, int numberOfNeurons) {
+    public ImagePreprocessor(String path) {
         try {
-            create(ImageIO.read(new File(path)), numberOfNeurons);
+            create(ImageIO.read(new File(path)), Network.NUMBER_OF_NEURON);
         } catch (IOException e) {
             throw new IllegalArgumentException("Error open image");
         }
     }
 
+    public ImagePreprocessor(String path, int numberOfNeuron) {
+        try {
+            create(ImageIO.read(new File(path)), numberOfNeuron);
+            this.processesForEducation();
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Error open image");
+        }
+    }
+
+    private void processesForEducation() {
+        this.toGrayImage();
+        this.createSubImages();
+    }
+
+
     public void createSubImages() {
-        int subHeight = image.getHeight() / 10;
         int subWidth = image.getWidth() / 6;
+        int subHeight = image.getHeight() / 10;
         subImages = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 6; j++) {
-                subImages.add(image.getSubimage(j * subWidth, i * subHeight, subWidth, subHeight));
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 10; j++) {
+                try {
+                    subImages.add(image.getSubimage(i * subWidth, j * subHeight, subWidth, subHeight));
+                } catch (RasterFormatException ex) {
+                    System.err.println(subWidth + " " + subHeight);
+                    throw new IllegalArgumentException(String.format("x = %d; y = %d", i * subWidth, j * subHeight));
+                }
             }
         }
     }
@@ -216,8 +238,8 @@ public class ImagePreprocessor {
             for (int j = 0; j < image.getHeight(); j++) {
                 Color currentColor = new Color(image.getRGB(i, j));
                 int brightness = (int) (0.2125 * currentColor.getRed() +
-                                0.7154 * currentColor.getGreen() +
-                                0.0721 * currentColor.getBlue());
+                        0.7154 * currentColor.getGreen() +
+                        0.0721 * currentColor.getBlue());
                 brightnessOfPixels[i][j] = brightness;
             }
         }
