@@ -1,5 +1,9 @@
 package logic.network;
 
+import logic.image.ImagePreprocessor;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,6 +16,7 @@ public class Network {
 
     private double result;
     private static List<Double> neuronsWeight = new ArrayList<>();
+    private static int numberOfNeuron = 60;
     static {
         List<String> neuronsWeightInFile;
         try {
@@ -29,12 +34,12 @@ public class Network {
         }
     }
 
-    public Network(double[] values) {
+    private void detecting(double[] values) {
         List<Layer> layers = new ArrayList<>();
         for (int i = 0; i < 10; ++i) {
             List<Neuron> neurons = new ArrayList<>();
-            for (int j = 0; j < 60; ++j) {
-                neurons.add(new Neuron(neuronsWeight.get(j + (i * 60))));
+            for (int j = 0; j < numberOfNeuron; ++j) {
+                neurons.add(new Neuron(neuronsWeight.get(j + (i * numberOfNeuron))));
             }
             layers.add(new Layer(neurons));
         }
@@ -47,11 +52,20 @@ public class Network {
         }
     }
 
-    private int[] stringToIntArr(String string) {
-        int[] values = new int[60];
-        char[] chars = string.toCharArray();
-        Arrays.setAll(values, i -> Integer.parseInt(String.valueOf(chars[i])));
-        return values;
+    public Network(BufferedImage image) {
+        ImagePreprocessor imagePreprocessor = new ImagePreprocessor(image, numberOfNeuron);
+        imagePreprocessor.toGrayImage();
+        //imagePreprocessor.binarizaid();
+        imagePreprocessor.cropImage();
+
+        String imageName = "30.png";
+        while (new File(imageName).exists()) {
+            int imageNum = Integer.parseInt(imageName.split("\\.")[0]) + 1;
+            imageName = imageNum + ".png";
+        }
+        imagePreprocessor.saveImage(imagePreprocessor.getImage(), imageName);
+        imagePreprocessor.createSubImages();
+        detecting(imagePreprocessor.getImageSignals());
     }
 
     public double getResult() {

@@ -4,6 +4,10 @@ import logic.image.ImagePreprocessor;
 import logic.network.Network;
 import org.junit.jupiter.api.Test;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -69,12 +73,12 @@ class NetworkTest {
     private String commonPath = "src/com/main/java/logic/network/education/imageForEducation/";
 
     @Test
-    void checkNormalNumber() {
+    void checkNormalNumber() throws IOException {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < new Random().nextInt(10); j++) {
-                ImagePreprocessor imagePreprocessor = new ImagePreprocessor(String.format("%s%d/%d%d.png", commonPath, i, i, j),
-                        60);
-                Network network = new Network(imagePreprocessor.getImageSignals());
+
+                BufferedImage image = ImageIO.read(new File(String.format("%s%d/%d%d.png", commonPath, i, i, j)));
+                Network network = new Network(image);
                 assertEquals(i, network.getResult());
                 System.out.println(i + "" + j);
             }

@@ -21,21 +21,13 @@ public class ImagePreprocessor {
     private double[] imageSignals;
     private int numberOfWhitePixels = 0;
     private int numberOfBlackPixels = 0;
-    private static double OBJECT_RATIO = 0.25;
-    private static int WHITE_RGB = new Color(255, 255, 255).getRGB();
-    private static int BLACK_RGB = new Color(0, 0, 0).getRGB();
+    private static int WHITE_RGB = Color.WHITE.getRGB();
+    private static int BLACK_RGB = Color.BLACK.getRGB();
 
     private void create(BufferedImage image, int numberOfNeurons) {
         this.image = image;
         this.imageSignals = new double[numberOfNeurons];
-        allImagePixels();
-        toGrayImage(this.image);
-        brightnessOfPixels();
-        binarizaid(this.image);
-        saveImage(this.image);
-        allImagePixels();
-        cropImage(this.image);
-        createSubImages();
+        updatePixelsImage();
     }
 
     public ImagePreprocessor(BufferedImage image, int numberOfNeurons) {
@@ -50,7 +42,7 @@ public class ImagePreprocessor {
         }
     }
 
-    private void createSubImages() {
+    public void createSubImages() {
         int subHeight = image.getHeight() / 10;
         int subWidth = image.getWidth() / 6;
         subImages = new ArrayList<>();
@@ -61,7 +53,7 @@ public class ImagePreprocessor {
         }
     }
 
-    private void toGrayImage(BufferedImage image) {
+    public void toGrayImage() {
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 Color pixelColor = new Color(allImagePixels[i][j]);
@@ -70,10 +62,10 @@ public class ImagePreprocessor {
                 image.setRGB(i, j, newPixelColor.getRGB());
             }
         }
-        this.image = image;
+        updatePixelsImage();
     }
 
-    private void cropImage(BufferedImage image) {
+    public void cropImage() {
         Point topPoint = findAnchorPoint(Course.TOP);
         Point leftPoint = findAnchorPoint(Course.LEFT);
         Point leftTopCropPoint = new Point(leftPoint.x, topPoint.y);
@@ -83,6 +75,7 @@ public class ImagePreprocessor {
         int cropWidth = leftTopCropPoint.distance(rightTopCropPoint);
         int cropHeight = leftTopCropPoint.distance(leftBottomCropPoint);
         this.image = image.getSubimage(leftTopCropPoint.x, leftTopCropPoint.y, cropWidth, cropHeight);
+        updatePixelsImage();
     }
 
     private enum Course {
@@ -94,6 +87,7 @@ public class ImagePreprocessor {
 
 
     private Point findAnchorPoint(Course course) {
+
         int imageHeight = image.getHeight() - 2;
         int imageWidth = image.getWidth() - 2;
 
@@ -134,8 +128,9 @@ public class ImagePreprocessor {
         return new Point(-1, -1);
     }
 
-    public void binarizaid(BufferedImage image) {
-        int treshold = searchTresholdBinarizaid(image);
+    public void binarizaid() {
+        brightnessOfPixels();
+        int treshold = searchTresholdBinarizaid();
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 if (allImagePixels[i][j] > treshold) {
@@ -145,9 +140,10 @@ public class ImagePreprocessor {
                 }
             }
         }
+        updatePixelsImage();
     }
 
-    private int searchTresholdBinarizaid(BufferedImage image) {
+    private int searchTresholdBinarizaid() {
         int maxBrightness = 255;
         int minBrightness = 0;
         for (int i = 0; i < image.getWidth(); i++) {
@@ -157,10 +153,10 @@ public class ImagePreprocessor {
                 minBrightness = Math.min(currentBrightness, minBrightness);
             }
         }
-        return maxBrightness - thresholdCounting(maxBrightness, minBrightness, image);
+        return maxBrightness - thresholdCounting(maxBrightness, minBrightness);
     }
 
-    private int[] createBarChart(int maxBrightness, int minBrightness, BufferedImage image) {
+    private int[] createBarChart(int maxBrightness, int minBrightness) {
         int barChartSize = maxBrightness - minBrightness + 1;
         int[] barChart = new int[barChartSize];
         for (int i = 0; i < image.getHeight() * image.getWidth(); i++) {
@@ -171,8 +167,8 @@ public class ImagePreprocessor {
         return barChart;
     }
 
-    private int thresholdCounting(int maxBrightness, int minBrightness, BufferedImage image) {
-        int[] barChart = createBarChart(maxBrightness, minBrightness, image);
+    private int thresholdCounting(int maxBrightness, int minBrightness) {
+        int[] barChart = createBarChart(maxBrightness, minBrightness);
         int sumAllColumnHeights = 0;
         int sumAllCHAndMiddle = 0;
         for (int i = 0; i <= maxBrightness - minBrightness; i++) {
@@ -202,7 +198,7 @@ public class ImagePreprocessor {
     }
 
 
-    private void allImagePixels() {
+    private void updatePixelsImage() {
         int[][] allPixels = new int[image.getWidth()][image.getHeight()];
 
         for (int i = 0; i < image.getWidth(); i++) {
