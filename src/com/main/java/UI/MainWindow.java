@@ -4,21 +4,19 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
-import javafx.scene.shape.PathElement;
 import javafx.stage.Stage;
-import logic.image.Geometry.Point;
 import logic.network.Network;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class MainWindow extends Application {
     private Label label;
@@ -63,17 +61,30 @@ public class MainWindow extends Application {
                     + "SceneX : SceneY - " + mouseEvent.getSceneX() + " : " + mouseEvent.getSceneY() + "\n"
                     + "ScreenX : ScreenY - " + mouseEvent.getScreenX() + " : " + mouseEvent.getScreenY());
 
+            Point currentPoint = new Point((int) mouseEvent.getX(), (int) mouseEvent.getY());
+
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
                 path.getElements().clear();
-                path.getElements().add(new MoveTo(mouseEvent.getX(), mouseEvent.getY()));
-                points[(int) mouseEvent.getSceneX()][(int) mouseEvent.getSceneY()] = 1;
+                path.getElements().add(new MoveTo(currentPoint.x, currentPoint.y));
             } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-                path.getElements().add(new LineTo(mouseEvent.getX(), mouseEvent.getY()));
-                points[(int) mouseEvent.getX()][(int) mouseEvent.getY()] = 1;
+
+                path.getElements().add(new LineTo(currentPoint.x, currentPoint.y));
+
+                // This knowledge was empirical way
+                // to make the translation from points to images more clear
+                for (int i = currentPoint.x - 4; i <= currentPoint.x; i++) {
+                    for (int j = currentPoint.y - 4; j <= currentPoint.y; j++) {
+                        points[i][j] = 1;
+                    }
+                }
             } else if (mouseEvent.getEventType() != MouseEvent.MOUSE_PRESSED &&
                     mouseEvent.getEventType() != MouseEvent.MOUSE_MOVED &&
                     !Arrays.deepEquals(points, new int[width][height])) {
-                System.out.println(new Network(createPicture()).getResult());
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Ur number: " + (int) new Network(createPicture()).getResult());
+                alert.showAndWait();
+
                 points = new int[width][height];
             }
         }

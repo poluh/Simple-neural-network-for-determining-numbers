@@ -3,6 +3,7 @@ package logic.network;
 import logic.image.ImagePreprocessor;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,7 +15,7 @@ public class Network {
 
     private double result;
     private static List<Double> neuronsWeight = new ArrayList<>();
-    public static int NUMBER_OF_NEURON = 60;
+    public static int NUMBER_OF_NEURON = 240;
     static {
         List<String> neuronsWeightInFile;
         try {
@@ -23,7 +24,7 @@ public class Network {
                     Files.readAllLines(Paths.get("src/com/main/java/logic/network/NeuronsWeight.txt"));
 
             neuronsWeightInFile.forEach(string -> {
-                if (!pattern.matcher(string).matches()) {
+                if (!pattern.matcher(string).matches() && !string.isEmpty()) {
                     neuronsWeight.add(Double.valueOf(string.replace("    ", "")));
                 }
             });
@@ -52,16 +53,15 @@ public class Network {
 
     public Network(BufferedImage image) {
         ImagePreprocessor imagePreprocessor = new ImagePreprocessor(image);
-        imagePreprocessor.toGrayImage();
-        //imagePreprocessor.binarizaid();
         imagePreprocessor.cropImage();
 
-        /*String imageName = "90.png";
-        while (new File(imageName).exists()) {
+        /*String path = "src/com/main/java/logic/network/education/imageForEducation/9/";
+        String imageName = "0.png";
+        while (new File(path + imageName).exists()) {
             int imageNum = Integer.parseInt(imageName.split("\\.")[0]) + 1;
             imageName = imageNum + ".png";
         }
-        imagePreprocessor.saveImage(imagePreprocessor.getImage(), imageName);*/
+        imagePreprocessor.saveImage(imagePreprocessor.getImage(), path + imageName);*/
         imagePreprocessor.createSubImages();
         detecting(imagePreprocessor.getImageSignals());
     }

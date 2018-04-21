@@ -60,11 +60,11 @@ public class ImagePreprocessor {
 
 
     public void createSubImages() {
-        int subWidth = image.getWidth() / 6;
-        int subHeight = image.getHeight() / 10;
+        int subWidth = image.getWidth() / 12;
+        int subHeight = image.getHeight() / 20;
         subImages = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 20; j++) {
                 try {
                     subImages.add(image.getSubimage(i * subWidth, j * subHeight, subWidth, subHeight));
                 } catch (RasterFormatException ex) {

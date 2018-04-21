@@ -9,17 +9,17 @@ import java.util.Random;
 
 public class Education {
 
-    private double[][][] imagesSignals = new double[10][10][60];
+    private double[][][] imagesSignals = new double[10][50][240];
     private ImagePreprocessor[] imagePreprocessors = new ImagePreprocessor[10];
     private String commonPath = "src/com/main/java/logic/network/education/imageForEducation/";
     private Network network;
 
     private Education() {
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                imagePreprocessors[i] = new ImagePreprocessor(String.format("%s%d/%d%d.png", commonPath, i, i, j),
-                        60);
-                System.out.println(String.format("%s%d/%d%d.png", commonPath, i, i, j));
+            for (int j = 0; j < 50; j++) {
+                imagePreprocessors[i] = new ImagePreprocessor(String.format("%s%d/%d.png", commonPath, i, j),
+                        240);
+                System.out.println(String.format("%s%d/%d.png", commonPath, i, j));
                 imagesSignals[i][j] = imagePreprocessors[i].getImageSignals();
             }
         }
@@ -27,9 +27,9 @@ public class Education {
 
     private void training() {
         for (int i = 0; i < 10; i++) {
-            Layer layer = new Layer(60);
-            for (int j = 0; j < 30000000; j++) {
-                for (int l = 0; l < 10; l++) {
+            Layer layer = new Layer(240);
+            for (int j = 0; j < 300000; j++) {
+                for (int l = 0; l < 50; l++) {
                     int randomNumber = new Random().nextInt(10);
                     double[][] imageSignals = imagesSignals[randomNumber];
                     layer.addAllSignals(imageSignals[l]);
