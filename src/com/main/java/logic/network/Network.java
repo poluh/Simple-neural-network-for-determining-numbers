@@ -55,6 +55,11 @@ public class Network {
     public Network(BufferedImage image) {
         ImagePreprocessor imagePreprocessor = new ImagePreprocessor(image);
         imagePreprocessor.cropImage();
+        try {
+            imagePreprocessor.resize(imagePreprocessor.getImage(), 50, 50);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String path = "src/com/main/java/logic/network/education/imageForEducation/9/";
         String imageName = "0.png";
         while (new File(path + imageName).exists()) {

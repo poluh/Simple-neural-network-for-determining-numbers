@@ -3,6 +3,7 @@ package logic.image;
 
 import logic.image.Geometry.Point;
 import logic.network.Network;
+import net.coobird.thumbnailator.Thumbnails;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -58,6 +59,9 @@ public class ImagePreprocessor {
         this.createSubImages();
     }
 
+    public void resize(BufferedImage img, int newW, int newH) throws IOException {
+        this.image = Thumbnails.of(img).forceSize(newW, newH).asBufferedImage();
+    }
 
     public void createSubImages() {
         int subWidth = image.getWidth() / 12;
