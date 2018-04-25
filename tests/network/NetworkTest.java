@@ -7,12 +7,16 @@ import org.junit.jupiter.api.Test;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class NetworkTest {
 
@@ -74,14 +78,16 @@ class NetworkTest {
 
     @Test
     void checkNormalNumber() throws IOException {
+        int allNumbers = 10 * 50;
+        int allCorrecAnswers = 0;
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < new Random().nextInt(10); j++) {
-
-                BufferedImage image = ImageIO.read(new File(String.format("%s%d/%d%d.png", commonPath, i, i, j)));
+            for (int j = 0; j < 49; j++) {
+                BufferedImage image = ImageIO.read(new File(String.format("%s%d/%d.png", commonPath, i, j)));
                 Network network = new Network(image);
-                assertEquals(i, network.getResult());
-                System.out.println(i + "" + j);
+                if (i == network.getResult()) allCorrecAnswers++;
             }
         }
+        double percentIncorrectAnswers = (double) (100 * (allNumbers - allCorrecAnswers)) / allNumbers;
+        assertTrue(percentIncorrectAnswers < 17);
     }
 }

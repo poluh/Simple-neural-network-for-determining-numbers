@@ -28,7 +28,7 @@ public class Education {
     private void training() {
         for (int i = 0; i < 10; i++) {
             Layer layer = new Layer(240);
-            for (int j = 0; j < 300000; j++) {
+            for (int j = 0; j < 3000000; j++) {
                 for (int l = 0; l < 50; l++) {
                     int randomNumber = new Random().nextInt(10);
                     double[][] imageSignals = imagesSignals[randomNumber];

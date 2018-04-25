@@ -12,9 +12,9 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.stage.Stage;
+import logic.image.Geometry.Point;
 import logic.network.Network;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
@@ -38,7 +38,7 @@ public class MainWindow extends Application {
         label = new Label("Wait mouse");
 
         path = new Path();
-        path.setStrokeWidth(1);
+        path.setStrokeWidth(3);
         path.setStroke(Color.BLACK);
 
         scene.setOnMouseClicked(mouseHandler);
@@ -53,21 +53,16 @@ public class MainWindow extends Application {
     }
 
     private EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
-
         @Override
         public void handle(MouseEvent mouseEvent) {
             label.setText(mouseEvent.getEventType() + "\n"
-                    + "X : Y - " + mouseEvent.getX() + " : " + mouseEvent.getY() + "\n"
-                    + "SceneX : SceneY - " + mouseEvent.getSceneX() + " : " + mouseEvent.getSceneY() + "\n"
-                    + "ScreenX : ScreenY - " + mouseEvent.getScreenX() + " : " + mouseEvent.getScreenY());
+                    + "X : Y - " + mouseEvent.getX() + " : " + mouseEvent.getY() + "\n");
 
             Point currentPoint = new Point((int) mouseEvent.getX(), (int) mouseEvent.getY());
 
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
-                path.getElements().clear();
                 path.getElements().add(new MoveTo(currentPoint.x, currentPoint.y));
             } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-
                 path.getElements().add(new LineTo(currentPoint.x, currentPoint.y));
 
                 // This knowledge was empirical way
@@ -81,10 +76,11 @@ public class MainWindow extends Application {
                     mouseEvent.getEventType() != MouseEvent.MOUSE_MOVED &&
                     !Arrays.deepEquals(points, new int[width][height])) {
 
+                System.out.println(new Network(createPicture()).getResult());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Ur number: " + (int) new Network(createPicture()).getResult());
+                alert.setHeaderText("Ur number " + (int) new Network(createPicture()).getResult());
                 alert.showAndWait();
-
+                path.getElements().clear();
                 points = new int[width][height];
             }
         }
