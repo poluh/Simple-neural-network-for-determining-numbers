@@ -1,12 +1,16 @@
 package UI;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -14,6 +18,7 @@ import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 import logic.image.Geometry.Point;
 import logic.network.Network;
+
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
@@ -28,7 +33,8 @@ public class MainWindow extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("AAAAAAAAAAAAAAAA");
-        Group root = new Group();
+        Group group = new Group();
+        AnchorPane root = new AnchorPane();
         Scene scene = new Scene(root, 500, 500);
 
         height = (int) scene.getHeight();
@@ -36,6 +42,10 @@ public class MainWindow extends Application {
         points = new int[width][height];
 
         label = new Label("Wait mouse");
+
+        Button button = new Button("Recognize");
+        button.setOnAction(buttonHandler);
+        button.setMinWidth(width);
 
         path = new Path();
         path.setStrokeWidth(3);
@@ -46,8 +56,12 @@ public class MainWindow extends Application {
         scene.setOnMouseMoved(mouseHandler);
         scene.setOnMousePressed(mouseHandler);
 
-        root.getChildren().add(label);
-        root.getChildren().add(path);
+        group.getChildren().add(label);
+        group.getChildren().add(path);
+        AnchorPane.setTopAnchor(group, 0.0);
+        AnchorPane.setBottomAnchor(button, 0.0);
+        root.getChildren().addAll(group, button);
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -72,20 +86,22 @@ public class MainWindow extends Application {
                         points[i][j] = 1;
                     }
                 }
-            } else if (mouseEvent.getEventType() != MouseEvent.MOUSE_PRESSED &&
-                    mouseEvent.getEventType() != MouseEvent.MOUSE_MOVED &&
-                    !Arrays.deepEquals(points, new int[width][height])) {
+            }
+        }
 
-                System.out.println(new Network(createPicture()).getResult());
-                new Network(createPicture()).getResult();
-                /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    };
+
+    private EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent buttonEvent) {
+            if (!Arrays.deepEquals(points, new int[width][height])) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Ur number " + (int) new Network(createPicture()).getResult());
-                alert.showAndWait();*/
+                alert.showAndWait();
                 path.getElements().clear();
                 points = new int[width][height];
             }
         }
-
     };
 
     private BufferedImage createPicture() {
