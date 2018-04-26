@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Education {
 
-    private double[][][] imagesSignals = new double[10][50][Network.NUMBER_OF_NEURON];
+    private int[][][] imagesSignals = new int[10][50][Network.NUMBER_OF_NEURON];
     private ImagePreprocessor[] imagePreprocessors = new ImagePreprocessor[10];
     private String commonPath = "src/com/main/java/logic/network/education/imageForEducation/";
     private Network network;
@@ -27,10 +27,10 @@ public class Education {
     private void training() {
         for (int i = 0; i < 10; i++) {
             Layer layer = new Layer(Network.NUMBER_OF_NEURON);
-            for (int j = 0; j < 30000000; j++) {
+            for (int j = 0; j < 3000000; j++) {
                     int randomNumber = new Random().nextInt(10);
                     int randomVariant = new Random().nextInt(50);
-                    double[][] imageSignals = imagesSignals[randomNumber];
+                    int[][] imageSignals = imagesSignals[randomNumber];
                     layer.addAllSignals(imageSignals[randomVariant]);
 
                     if (randomNumber == i) {
@@ -47,7 +47,7 @@ public class Education {
     private static void setW(boolean isDecrease, Layer layer) {
         layer.getNeurons().forEach((Neuron neuron) -> {
             if (neuron.getInput() != 0) {
-                neuron.setWeight(neuron.getWeight() + (isDecrease ? -0.000001 : 0.000001));
+                neuron.setWeight(neuron.getWeight() + (isDecrease ? -0.0000001 : 0.0000001));
             }
         });
     }

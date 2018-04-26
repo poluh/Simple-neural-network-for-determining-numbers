@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Layer {
     private List<Neuron> neurons;
 
-    Layer(int amount, double[] values) {
+    Layer(int amount, int[] values) {
         List<Neuron> neurons = new ArrayList<>();
         for (int i = 0; i < amount; ++i) {
             Neuron neuron = new Neuron();
@@ -29,7 +29,7 @@ public class Layer {
         this.neurons = neurons;
     }
 
-    public void addAllSignals(double[] signals) {
+    public void addAllSignals(int[] signals) {
         for (int i = 0; i < this.neurons.size(); i++) {
             Neuron neuron = this.neurons.get(i);
             neuron.setInput(signals[i]);

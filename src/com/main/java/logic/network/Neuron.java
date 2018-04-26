@@ -5,7 +5,7 @@ import java.util.List;
 public class Neuron {
 
     private double weight = 0;
-    private double input;
+    private int input;
 
     Neuron() {}
 
@@ -25,7 +25,7 @@ public class Neuron {
         return input;
     }
 
-    public void setInput(double input) {
+    public void setInput(int input) {
         this.input = input;
     }
 

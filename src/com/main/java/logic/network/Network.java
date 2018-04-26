@@ -15,7 +15,7 @@ public class Network {
 
     private double result;
     private static List<Double> neuronsWeight = new ArrayList<>();
-    public static int NUMBER_OF_NEURON = 225;
+    public static int NUMBER_OF_NEURON = 2500;
     public static int IMAGE_SIDE_FOR_SIGNAL = 15;
 
     static {
@@ -35,7 +35,7 @@ public class Network {
         }
     }
 
-    private void detecting(double[] values) {
+    private void detecting(int[] values) {
         List<Layer> layers = new ArrayList<>();
         for (int i = 0; i < 10; ++i) {
             List<Neuron> neurons = new ArrayList<>();
@@ -57,12 +57,7 @@ public class Network {
         ImagePreprocessor imagePreprocessor = new ImagePreprocessor(image);
         imagePreprocessor.cropImage();
         imagePreprocessor.resize(imagePreprocessor.getImage(), 50, 50);
-        /*try {
-            imagePreprocessor.resize(imagePreprocessor.getImage(), 50, 50);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String path = "src/com/main/java/logic/network/education/imageForEducation/9/";
+        /*String path = "src/com/main/java/logic/network/education/imageForEducation/9/";
         String imageName = "0.png";
         while (new File(path + imageName).exists()) {
             int imageNum = Integer.parseInt(imageName.split("\\.")[0]) + 1;

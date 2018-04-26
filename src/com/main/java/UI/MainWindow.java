@@ -77,9 +77,10 @@ public class MainWindow extends Application {
                     !Arrays.deepEquals(points, new int[width][height])) {
 
                 System.out.println(new Network(createPicture()).getResult());
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                new Network(createPicture()).getResult();
+                /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Ur number " + (int) new Network(createPicture()).getResult());
-                alert.showAndWait();
+                alert.showAndWait();*/
                 path.getElements().clear();
                 points = new int[width][height];
             }

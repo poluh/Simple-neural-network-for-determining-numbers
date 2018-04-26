@@ -21,7 +21,7 @@ public class ImagePreprocessor {
     private BufferedImage image;
     private int[][] allImagePixels;
     private BufferedImage[] subImages = new BufferedImage[Network.NUMBER_OF_NEURON];
-    private double[] imageSignals = new double[Network.NUMBER_OF_NEURON];
+    private int[] imageSignals = new int[Network.NUMBER_OF_NEURON];
     private int numberOfWhitePixels = 0;
     private int numberOfBlackPixels = 0;
     private static int WHITE_RGB = Color.WHITE.getRGB();
@@ -255,11 +255,19 @@ public class ImagePreprocessor {
         return image;
     }
 
-    public double[] getImageSignals() {
-        this.createSubImages();
+    public int[] getImageSignals() {
+
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                if (image.getRGB(i, j) == WHITE_RGB) {
+                    imageSignals[i * image.getWidth() + j] = 1;
+                }
+            }
+        }
+        /*this.createSubImages();
         IntStream.range(0, subImages.length).forEach(i -> {
             imageSignals[i] = imageCoefficien(subImages[i]);
-        });
+        });*/
 
         return imageSignals;
     }
