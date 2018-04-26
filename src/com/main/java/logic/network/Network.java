@@ -15,7 +15,8 @@ public class Network {
 
     private double result;
     private static List<Double> neuronsWeight = new ArrayList<>();
-    public static int NUMBER_OF_NEURON = 240;
+    public static int NUMBER_OF_NEURON = 225;
+    public static int IMAGE_SIDE_FOR_SIGNAL = 15;
 
     static {
         List<String> neuronsWeightInFile;
@@ -55,7 +56,8 @@ public class Network {
     public Network(BufferedImage image) {
         ImagePreprocessor imagePreprocessor = new ImagePreprocessor(image);
         imagePreprocessor.cropImage();
-        try {
+        imagePreprocessor.resize(imagePreprocessor.getImage(), 50, 50);
+        /*try {
             imagePreprocessor.resize(imagePreprocessor.getImage(), 50, 50);
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,8 +68,7 @@ public class Network {
             int imageNum = Integer.parseInt(imageName.split("\\.")[0]) + 1;
             imageName = imageNum + ".png";
         }
-        imagePreprocessor.saveImage(imagePreprocessor.getImage(), path + imageName);
-        imagePreprocessor.createSubImages();
+        imagePreprocessor.saveImage(imagePreprocessor.getImage(), path + imageName);*/
         detecting(imagePreprocessor.getImageSignals());
     }
 

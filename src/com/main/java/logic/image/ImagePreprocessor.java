@@ -19,63 +19,36 @@ import java.util.stream.IntStream;
 public class ImagePreprocessor {
 
     private BufferedImage image;
-    private List<BufferedImage> subImages;
     private int[][] allImagePixels;
-    private double[] imageSignals;
+    private BufferedImage[] subImages = new BufferedImage[Network.NUMBER_OF_NEURON];
+    private double[] imageSignals = new double[Network.NUMBER_OF_NEURON];
     private int numberOfWhitePixels = 0;
     private int numberOfBlackPixels = 0;
     private static int WHITE_RGB = Color.WHITE.getRGB();
     private static int BLACK_RGB = Color.BLACK.getRGB();
 
-    private void create(BufferedImage image, int numberOfNeurons) {
+    private void create(BufferedImage image) {
         this.image = image;
-        this.imageSignals = new double[numberOfNeurons];
         updatePixelsImage();
     }
 
     public ImagePreprocessor(BufferedImage image) {
-        create(image, Network.NUMBER_OF_NEURON);
+        create(image);
     }
 
     public ImagePreprocessor(String path) {
         try {
-            create(ImageIO.read(new File(path)), Network.NUMBER_OF_NEURON);
+            create(ImageIO.read(new File(path)));
         } catch (IOException e) {
             throw new IllegalArgumentException("Error open image");
         }
     }
 
-    public ImagePreprocessor(String path, int numberOfNeuron) {
+    public void resize(BufferedImage img, int newW, int newH) {
         try {
-            create(ImageIO.read(new File(path)), numberOfNeuron);
-            this.processesForEducation();
+            this.image = Thumbnails.of(img).forceSize(newW, newH).asBufferedImage();
         } catch (IOException e) {
-            throw new IllegalArgumentException("Error open image");
-        }
-    }
-
-    private void processesForEducation() {
-        this.toGrayImage();
-        this.createSubImages();
-    }
-
-    public void resize(BufferedImage img, int newW, int newH) throws IOException {
-        this.image = Thumbnails.of(img).forceSize(newW, newH).asBufferedImage();
-    }
-
-    public void createSubImages() {
-        int subWidth = image.getWidth() / 12;
-        int subHeight = image.getHeight() / 20;
-        subImages = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 20; j++) {
-                try {
-                    subImages.add(image.getSubimage(i * subWidth, j * subHeight, subWidth, subHeight));
-                } catch (RasterFormatException ex) {
-                    System.err.println(subWidth + " " + subHeight);
-                    throw new IllegalArgumentException(String.format("x = %d; y = %d", i * subWidth, j * subHeight));
-                }
-            }
+            e.printStackTrace();
         }
     }
 
@@ -89,6 +62,22 @@ public class ImagePreprocessor {
             }
         }
         updatePixelsImage();
+    }
+
+     private void createSubImages() {
+        int imageSide = Network.IMAGE_SIDE_FOR_SIGNAL;
+        int subWidth = image.getWidth() / imageSide;
+        int subHeight = image.getHeight() / imageSide;
+        for (int i = 0; i < imageSide; i++) {
+            for (int j = 0; j < imageSide; j++) {
+                try {
+                    subImages[i * imageSide + j] = image.getSubimage(i * subWidth, j * subHeight, subWidth, subHeight);
+                } catch (RasterFormatException ex) {
+                    System.err.println(subWidth + " " + subHeight);
+                    throw new IllegalArgumentException(String.format("x = %d; y = %d", i * subWidth, j * subHeight));
+                }
+            }
+        }
     }
 
     public void cropImage() {
@@ -266,14 +255,10 @@ public class ImagePreprocessor {
         return image;
     }
 
-    public List<BufferedImage> getSubImages() {
-        return subImages;
-    }
-
     public double[] getImageSignals() {
-        imageSignals = new double[subImages.size()];
-        IntStream.range(0, subImages.size()).forEach(i -> {
-            imageSignals[i] = imageCoefficien(subImages.get(i));
+        this.createSubImages();
+        IntStream.range(0, subImages.length).forEach(i -> {
+            imageSignals[i] = imageCoefficien(subImages[i]);
         });
 
         return imageSignals;
