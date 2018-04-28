@@ -3,6 +3,7 @@ package logic.network;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Layer {
     private List<Neuron> neurons;
@@ -30,9 +31,8 @@ public class Layer {
     }
 
     public void addAllSignals(int[] signals) {
-        for (int i = 0; i < this.neurons.size(); i++) {
-            Neuron neuron = this.neurons.get(i);
-            neuron.setInput(signals[i]);
+        for (int i = 0; i < Network.NUMBER_OF_NEURON; i++) {
+            neurons.get(i).setInput(signals[i]);
         }
     }
 

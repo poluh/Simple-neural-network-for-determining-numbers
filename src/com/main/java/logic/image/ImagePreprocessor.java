@@ -8,22 +8,21 @@ import net.coobird.thumbnailator.Thumbnails;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RasterFormatException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.Set;
 
 
 public class ImagePreprocessor {
 
     private BufferedImage image;
     private int[][] allImagePixels;
-    private BufferedImage[] subImages = new BufferedImage[Network.NUMBER_OF_NEURON];
-    private int[] imageSignals = new int[Network.NUMBER_OF_NEURON];
-    private int numberOfWhitePixels = 0;
-    private int numberOfBlackPixels = 0;
+    private int[] imageSignals;
+    private Set<ImagePreprocessor> otherImagePreprocessors = new HashSet<>();
+    private List<Point> pointsObject = new ArrayList<>();
     private static int WHITE_RGB = Color.WHITE.getRGB();
     private static int BLACK_RGB = Color.BLACK.getRGB();
 
@@ -47,9 +46,18 @@ public class ImagePreprocessor {
     public void resize(BufferedImage img, int newW, int newH) {
         try {
             this.image = Thumbnails.of(img).forceSize(newW, newH).asBufferedImage();
+            updatePixelsImage();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public BufferedImage copy(BufferedImage image) {
+        BufferedImage imageCopy = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
+        Graphics graphics = imageCopy.getGraphics();
+        graphics.drawImage(image, 0, 0, null);
+        graphics.dispose();
+        return imageCopy;
     }
 
     public void toGrayImage() {
@@ -62,22 +70,6 @@ public class ImagePreprocessor {
             }
         }
         updatePixelsImage();
-    }
-
-     private void createSubImages() {
-        int imageSide = Network.IMAGE_SIDE_FOR_SIGNAL;
-        int subWidth = image.getWidth() / imageSide;
-        int subHeight = image.getHeight() / imageSide;
-        for (int i = 0; i < imageSide; i++) {
-            for (int j = 0; j < imageSide; j++) {
-                try {
-                    subImages[i * imageSide + j] = image.getSubimage(i * subWidth, j * subHeight, subWidth, subHeight);
-                } catch (RasterFormatException ex) {
-                    System.err.println(subWidth + " " + subHeight);
-                    throw new IllegalArgumentException(String.format("x = %d; y = %d", i * subWidth, j * subHeight));
-                }
-            }
-        }
     }
 
     public void cropImage() {
@@ -256,43 +248,42 @@ public class ImagePreprocessor {
     }
 
     public int[] getImageSignals() {
-
+        imageSignals = new int[Network.NUMBER_OF_NEURON];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
-                if (image.getRGB(i, j) == WHITE_RGB) {
-                    imageSignals[i * image.getWidth() + j] = 1;
-                }
+                imageSignals[i * image.getWidth() + j] = image.getRGB(i, j) == WHITE_RGB ? 1 : 0;
             }
         }
-        /*this.createSubImages();
-        IntStream.range(0, subImages.length).forEach(i -> {
-            imageSignals[i] = imageCoefficien(subImages[i]);
-        });*/
 
         return imageSignals;
     }
 
-    private double imageCoefficien(BufferedImage image) {
-        double backgroundColor = mainColor(image);
-        double objectColor = (numberOfWhitePixels == backgroundColor) ? numberOfBlackPixels : numberOfWhitePixels;
-        return objectColor / backgroundColor;
-    }
-
-    private int mainColor(BufferedImage image) {
-        int whitePixels = 0;
-        int blackPixels = 0;
-
-        for (int i = 0; i < image.getWidth(); i++) {
-            for (int j = 0; j < image.getHeight(); j++) {
-                if (image.getRGB(i, j) == WHITE_RGB) {
-                    whitePixels++;
-                } else {
-                    blackPixels++;
+    public void devidedIntoSeveralImages() {
+        cropImage();
+        List<Set<Integer>> setList = new ArrayList<>();
+        for (int i = 10; i < image.getWidth(); i++) {
+            Set<Integer> oneLane = new HashSet<>();
+            for (int j = 10; j < image.getHeight(); j++) {
+                oneLane.add(allImagePixels[i][j]);
+            }
+            System.out.println(oneLane);
+            if (oneLane.size() == 1) {
+                setList.add(oneLane);
+                if (setList.size() == 20) {
+                    BufferedImage subImage = copy(image.getSubimage(0, 0, i, image.getHeight()));
+                    otherImagePreprocessors.add(
+                            new ImagePreprocessor(subImage));
+                    image = image.getSubimage(i, 0, image.getWidth() - subImage.getWidth(), image.getHeight());
+                    cropImage();
+                    devidedIntoSeveralImages();
                 }
+            } else {
+                setList.clear();
             }
         }
-        numberOfWhitePixels = whitePixels;
-        numberOfBlackPixels = blackPixels;
-        return whitePixels > blackPixels ? whitePixels : blackPixels;
+    }
+
+    public Set<ImagePreprocessor> getOtherImagePreprocessors() {
+        return otherImagePreprocessors;
     }
 }
