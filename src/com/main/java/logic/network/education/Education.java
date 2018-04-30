@@ -19,7 +19,7 @@ public class Education {
     private String commonPath = "src/com/main/java/logic/network/education/imageForEducation/";
     private String[] allWeights;
 
-    private Education() {
+    public Education() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 50; j++) {
                 imagePreprocessors[i] = new ImagePreprocessor(String.format("%s%d/%d.png", commonPath, i, j));
@@ -29,7 +29,7 @@ public class Education {
         }
     }
 
-    private void training() throws IOException {
+    public void training() throws IOException {
         Thread[] threads = new Thread[10];
         IntStream.range(0, 10).forEach(i -> {
             threads[i] = new Thread(() -> checkNumber(i));
@@ -56,13 +56,12 @@ public class Education {
     private void checkNumber(int numberForCheck) {
         Layer layer = new Layer(Network.NUMBER_OF_NEURON);
         for (int j = 0; j < 30000000; j++) {
-            int randomNumber = new Random().nextInt(10);
             int randomVariant = new Random().nextInt(50);
-            int[][] imageSignals = imagesSignals[randomNumber];
+            int[][] imageSignals = imagesSignals[numberForCheck];
             layer.addAllSignals(imageSignals[randomVariant]);
 
-            if (randomNumber == numberForCheck) {
-                if (layer.getResult() < 0.55) setW(false, layer);
+            if (layer.getResult() < 0.55) {
+                setW(false, layer);
             } else {
                 if (layer.getResult() > 0.45) setW(true, layer);
             }
@@ -78,15 +77,6 @@ public class Education {
                 neuron.setWeight(neuron.getWeight() + (isDecrease ? -0.00000000001 : 0.00000000001));
             }
         });
-    }
-
-    public static void main(String[] args) {
-        Education education = new Education();
-        try {
-            education.training();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

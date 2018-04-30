@@ -1,8 +1,11 @@
+import logic.network.education.Education;
+
 import java.io.IOException;
 
 public class Main {
 
-    static int magic(double x) {
+    // Just save for history
+    /*static int magic(double x) {
         return (int) ((((double)
                 72 * (x - 1) * (x - 2) * (x - 3) * (x - 4) * (x - 5) * (x - 6) * (x - 7) *
                 (x - 8) * (x - 9) * (x - 10) * (x - 11)) / -39916800.000000) + (((x - 0) *
@@ -28,5 +31,10 @@ public class Main {
 
     public static void main(String[] args) {
         for (int i = 0; i < 12; ++i) System.out.print((char) magic(i));
+    }*/
+
+    public static void main(String[] args) throws IOException {
+        Education education = new Education();
+        education.training();
     }
 }
